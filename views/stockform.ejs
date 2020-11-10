@@ -1,0 +1,46 @@
+<%- include("header"); -%>
+<div class="container">
+    <h2 class="mt-4 mb-4" style="text-align:center;">Stock Entry</h2>
+    
+    <form action="/form/stock" method="POST">
+        <div class="row">
+            <div class="col-sm-4">
+                <%for( var i= 0 ;i< parseInt(item.length/3) ;i++ ) {%>
+                    <div class="mt-4 form-group row">
+                        <label class="col-sm-5 col-form-label" for="item"><%= item[i].Item_Name %></label>
+                        <div class="col-sm-7"> 
+                        <input class="form-control" type="text" name="item" placeholder="quantity"/>
+                        </div>
+                    </div>
+                <%}%>
+            </div>
+
+            <div class="col-sm-4">
+                <%for( var i= parseInt(item.length/3) ;i< parseInt(item.length/1.5) ;i++ ) {%>
+                    <div class="mt-4 form-group row">
+                        <label class="col-sm-5 col-form-label" for="item"><%= item[i].Item_Name %></label>
+                        <div class="col-sm-7"> 
+                        <input class="form-control" type="text" name="item" placeholder="quantity"/>
+                        </div>
+                    </div>
+                <%}%>
+            </div>
+
+            <div class="col-sm-4">
+                <%for( var i= parseInt(item.length/1.5) ;i< item.length ;i++ ) {%>
+                    <div class="mt-4 form-group row">
+                        <label class="col-sm-5 col-form-label" for="item"><%= item[i].Item_Name %></label>
+                        <div class="col-sm-7"> 
+                        <input class="form-control" type="text" name="item" placeholder="quantity"/>
+                        </div>
+                    </div>
+                <%}%>
+            </div>
+        </div>
+        <div class="mt-2 form-row">
+            <button style="width: 100%;" class="btn btn-primary" type="submit">SUBMIT</button>
+        </div>
+    </form>
+</div>
+
+<%- include("footer"); -%>

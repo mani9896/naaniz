@@ -1,0 +1,13 @@
+<%- include("header"); -%>
+<div class="container">
+    <h2 class="mt-4 mb-4" style="text-align:center;">Recipe Master Upload</h2>
+    <form action="/add/submit/recipe" method="POST" enctype="multipart/form-data">
+        <div class="form-group mt-4 mb-4">
+            <label for="FormControlFile">Upload Recipe Master</label>
+            <input style="height: 10%; width: 80%;" type="file"  class="form-control-file " name="xcel" id="FormControlFile" required>
+        </div>
+        <button class="btn btn-primary mt-2" type="submit">SUBMIT</button>
+    </form>
+</div>
+
+<%- include("footer"); -%>

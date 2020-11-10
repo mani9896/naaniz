@@ -1,0 +1,30 @@
+<%- include("header") -%>
+
+<div class="container">
+  <h1 class="mt-4 mb-4" style="text-align: center;font-family: sans-serif;">Login</h1>
+  <form action="/user/login" method="POST" name="login">
+    <div class="mt-4 form-group row">
+      <label class="col-sm-2 col-form-label" for="username">Username<span style="color:#ab0707"> * </span></label>
+      <div class="col-sm-10"> 
+        <input class="form-control" type="text" name="username" placeholder="username" required />
+      </div>
+    </div>
+
+    <div class="mt-4 form-group row">
+      <label class="col-sm-2 col-form-label" for="password">Password<span style="color:#ab0707"> * </span></label>
+      <div class="col-sm-10"> 
+        <input class="form-control" type="password" name="password"  placeholder="password" minlength="4" maxlength="10" required/>
+      </div>
+    </div>
+
+    <div class="mt-4 form-group">
+      <button class="btn btn-lg btn-primary mb-2" style="width: 100%;" type="submit" value="submit">Login</button>
+    </div>
+
+  </form>
+</div>
+
+<%- include("footer") -%>
+
+
+

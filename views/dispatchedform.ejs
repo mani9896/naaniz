@@ -1,0 +1,48 @@
+<%- include("header"); -%>
+<div class="container">
+    <h2 class="mt-4 mb-4" style="text-align:center;">Dispatch Entry</h2>
+    <form action="/form/dispatch" method="POST">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="inputGroupSelect">Send items to Kitchen: </label>
+            </div>
+            <select class="custom-select" id="inputGroupSelect" name="kitchen">
+                <%for(var i=0;i<kitchens.length ;i++){%>
+                <option value="<%=kitchens[i].Name%>"><%=kitchens[i].Name%></option>
+                <%}%>
+            </select>
+        </div>
+                   
+        <div class="fieldS">
+            <div class="field">
+                <div class="form-row">
+                    <div class="col-md-6 mb-3">
+                    <label for="dish">Dish name</label>
+                    <input type="text" class="form-control" name="dish" placeholder="Dish Name" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                    <label for="qty">Quantity</label>
+                    <input type="text" class="form-control" name="qty" placeholder="Quantity" required>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <button class="btn btn-primary" type="submit">SUBMIT</button>
+        </div>
+    </form>
+
+    <form  action="" id="compose">
+        <div class="form-row">
+            <button style="display: inline;" class="mt-2 btn btn-success" id="addfield">Add More Dishes</button>
+        </div>
+    </form>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/main2.js"></script>
+
+<%- include("footer"); -%>
+   
+
+
