@@ -64,6 +64,7 @@ io.on("connection", function (socket) {
   console.log("Connected socket");
 });
 
-server.listen(3000 || PORT, function (req, res) {
-  console.log("Server is Running!");
+const port = process.env.PORT || 3000;
+app.listen(port, function(){
+	console.log("The server has Started!");
 });
