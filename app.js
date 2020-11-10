@@ -8,11 +8,12 @@ const PORT = process.env.PORT;
 const http = require("http");
 const bodyParser = require("body-parser");
 
-const session = require('express-session')
-const MemoryStore = require('memorystore')(session)
 const server = http.createServer(app);
 const io = socketio(server);
 const upload = require("./routes/middleware/multerMiddleware");
+
+const session = require('express-session');
+//const MemoryStore = require('memorystore')(session);
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -21,10 +22,10 @@ app.use(express.json({ extended: false }));
 
 
 app.use(session({
-  cookie: { maxAge: 86400000 },
-  store: new MemoryStore({
-    checkPeriod: 86400000 // prune expired entries every 24h
-  }),
+  // cookie: { maxAge: 86400000 },
+  // store: new MemoryStore({
+  //   checkPeriod: 86400000 // prune expired entries every 24h
+  // }),
 	secret: "2C44-4D44-WppQ38S",
 	resave: true,
 	saveUninitialized: true
@@ -65,6 +66,6 @@ io.on("connection", function (socket) {
 });
 
 const port = process.env.PORT || 3000;
-app.listen(port, function(){
+server.listen(port, function(){
 	console.log("The server has Started!");
 });
