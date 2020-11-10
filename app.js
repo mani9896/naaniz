@@ -8,6 +8,8 @@ const PORT = process.env.PORT;
 const http = require("http");
 const bodyParser = require("body-parser");
 
+const session = require('express-session')
+const MemoryStore = require('memorystore')(session)
 const server = http.createServer(app);
 const io = socketio(server);
 const upload = require("./routes/middleware/multerMiddleware");
@@ -18,7 +20,11 @@ app.use(express.static("public"));
 app.use(express.json({ extended: false }));
 
 
-app.use(require("express-session")({
+app.use(session({
+  cookie: { maxAge: 86400000 },
+  store: new MemoryStore({
+    checkPeriod: 86400000 // prune expired entries every 24h
+  }),
 	secret: "2C44-4D44-WppQ38S",
 	resave: true,
 	saveUninitialized: true
