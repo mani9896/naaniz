@@ -7,9 +7,9 @@
               <label class="input-group-text" for="inputGroupSelect">Recieved items from Kitchen: </label>
             </div>
             <select class="custom-select" id="inputGroupSelect" name="kitchen">
-                <%for(var i=0;i<kitchens.length ;i++){%>
-                <option value="<%=kitchens[i].Name%>"><%=kitchens[i].Name%></option>
-                <%}%>
+                <% for(var i=0;i<kitchens.length ;i++){ %>
+                <option value="<%= kitchens[i].Name %>"><%= kitchens[i].Name %></option>
+                <% } %>
             </select>
         </div>
                    
