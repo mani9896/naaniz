@@ -42,7 +42,7 @@ app.get("/", async (req, res) => {
   if (req.session.admin) {
     msg = ["Logged In"];
   }
-  res.render("home", {
+  res.render("index", {
     msg: msg,
     display1: "none",
     display2: "none",
