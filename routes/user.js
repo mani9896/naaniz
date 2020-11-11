@@ -53,7 +53,7 @@ router.post("/signup", checkIfUserExists, async (req, res) => {
       } else {
         msg = "USER REGISTERED PLEASE LOGIN";
         var fail = true;
-        res.render("Home", {
+        res.render("index", {
           msg: ["USER REGISTERED PLEASE LOGIN"],
           fail: fail,
           display1: "block",

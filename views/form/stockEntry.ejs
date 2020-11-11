@@ -1,13 +1,15 @@
 <%- include("../partials/header"); -%>
 <div class="container">
     <h2 class="mt-4" style="text-align:center;">Stock Entry</h2>
-    
+    <button class="btn btn-primary">Bakery</button>
+    <button class="btn btn-primary">Consumable</button>
     <form action="/form/stock" method="POST">
         <div class="row">
             <div class="col-sm-4">
+               
                 <%for( var i= 0 ;i< parseInt(item.length/3) ;i++ ) {%>
                     <div class="mt-4 form-group row">
-                        <label class="col-sm-5 col-form-label" for="item"><%= item[i].Item_Name %></label>
+                        <label class="col-sm-5 col-form-label" for="item"><%= item[i].Item_Name %> (<%= item[i].Measurable_Unit %>)</label>
                         <div class="col-sm-7"> 
                         <input class="form-control" type="text" name="item" placeholder="quantity"/>
                         </div>
