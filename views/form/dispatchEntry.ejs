@@ -1,10 +1,10 @@
-<%- include("header"); -%>
+<%- include("../partials/header"); -%>
 <div class="container">
-    <h2 class="mt-4 mb-4" style="text-align:center;">Recieved Entry</h2>
-    <form action="/form/received" method="POST">
+    <h2 class="mt-4 mb-4" style="text-align:center;">Dispatch Entry</h2>
+    <form action="/form/dispatch" method="POST">
         <div class="input-group mb-3">
             <div class="input-group-prepend">
-              <label class="input-group-text" for="inputGroupSelect">Recieved items from Kitchen: </label>
+              <label class="input-group-text" for="inputGroupSelect">Send items to Kitchen: </label>
             </div>
             <select class="custom-select" id="inputGroupSelect" name="kitchen">
                 <%for(var i=0;i<kitchens.length ;i++){%>
@@ -39,7 +39,7 @@
     </form>
 </div>
 
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="/js/main3.js"></script>
+<%- include("../partials/footer"); -%>
+   
 
-<%- include("footer"); -%>
+

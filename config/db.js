@@ -1,5 +1,7 @@
 const mysql = require("mysql");
 
+//localhost database
+
 // const db = mysql.createConnection({
 //   host: "127.0.0.1",
 //   user: "root",
@@ -7,6 +9,8 @@ const mysql = require("mysql");
 //   database: "naniz",
 //   dialect: "mysql"
 // });
+
+//aws database
 
 const db = mysql.createConnection({
   host: "database-1.c1dhbv3ltu4l.ap-south-1.rds.amazonaws.com",

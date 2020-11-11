@@ -13,7 +13,7 @@ const io = socketio(server);
 const upload = require("./routes/middleware/multerMiddleware");
 
 const session = require('express-session');
-//const MemoryStore = require('memorystore')(session);
+const MemoryStore = require('memorystore')(session);
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -22,10 +22,10 @@ app.use(express.json({ extended: false }));
 
 
 app.use(session({
-  // cookie: { maxAge: 86400000 },
-  // store: new MemoryStore({
-  //   checkPeriod: 86400000 // prune expired entries every 24h
-  // }),
+  cookie: { maxAge: 86400000 },
+  store: new MemoryStore({
+    checkPeriod: 86400000 // prune expired entries every 24h
+  }),
 	secret: "2C44-4D44-WppQ38S",
 	resave: true,
 	saveUninitialized: true
@@ -42,7 +42,7 @@ app.get("/", async (req, res) => {
   if (req.session.admin) {
     msg = ["Logged In"];
   }
-  res.render("Home", {
+  res.render("home", {
     msg: msg,
     display1: "none",
     display2: "none",

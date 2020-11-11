@@ -13,7 +13,7 @@ const router = express.Router();
 var msg = null;
 const isLogged = require("./middleware/checkifLogged");
 router.get("/inventory", isLogged, (req, res) => {
-  res.render("uploadinventory", {
+  res.render("upload/inventory", {
     // title: "Upload Inventory Excel sheet",
     msg: msg,
     display1: "none",
@@ -92,7 +92,7 @@ router.post("/submit/recipe", upload.array("xcel"), async (req, res) => {
 });
 
 router.get("/recipe", isLogged, (req, res) => {
-  res.render("uploadrecipe", {
+  res.render("upload/recipe", {
     title: "Upload Recipe Excel sheet",
     msg: msg,
     display1: "none",

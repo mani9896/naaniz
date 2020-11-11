@@ -66,13 +66,13 @@ router.post("/signup", checkIfUserExists, async (req, res) => {
 });
 
 router.get("/login", function (req, res) {
-  res.render("Login", {
+  res.render("user/login", {
     logged: req.session.admin,
   });
 });
 
 router.get("/signup", function (req, res) {
-  res.render("SignUP", {
+  res.render("user/signup", {
     msg: null,
     logged: req.session.admin,
   });

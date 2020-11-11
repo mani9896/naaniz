@@ -31,7 +31,7 @@ router.get("/stock", isLogged, async (req, res) => {
     fields
   ) {
     items = results;
-    res.render("stockform", { logged: req.session.admin, item: results });
+    res.render("form/stockEntry", { logged: req.session.admin, item: results });
   });
 });
 
@@ -55,7 +55,7 @@ router.post("/stock", async (req, res) => {
 
 //PRODUCTION FORM
 router.get("/production", isLogged, async (req, res) => {
-  res.render("productionform", { logged: req.session.admin });
+  res.render("form/productionEntry", { logged: req.session.admin });
 });
 
 router.post("/production", isLogged, async (req, res) => {
@@ -114,7 +114,7 @@ router.get("/dispatch", isLogged, async (req, res) => {
     } else {
       kitchens = result;
       console.log(result);
-      res.render("dispatchedform", {
+      res.render("form/dispatchEntry", {
         logged: req.session.admin,
         kitchens: kitchens,
       });
@@ -177,7 +177,7 @@ router.post("/dispatch", async (req, res) => {
 });
 
 //ALL Received FORM DATA
-router.get("/received", isLogged, async (req, res) => {
+router.get("/receive", isLogged, async (req, res) => {
   var kitchens;
   await db.query("SELECT Name from users", function (err, result, fields) {
     if (err) {
@@ -185,7 +185,7 @@ router.get("/received", isLogged, async (req, res) => {
     } else {
       kitchens = result;
 
-      res.render("receivedform", {
+      res.render("form/receiveEntry", {
         logged: req.session.admin,
         kitchens: kitchens,
       });
@@ -193,7 +193,7 @@ router.get("/received", isLogged, async (req, res) => {
   });
 });
 
-router.post("/received", async (req, res) => {
+router.post("/receive", async (req, res) => {
   var today = new Date();
   console.log(typeof req.body.dish);
   if (typeof req.body.dish == "object") {
