@@ -25,32 +25,60 @@ var items;
 
 //STOCK CODE
 router.get("/stock", isLogged, async (req, res) => {
-  await db.query("SELECT Item_Name FROM inventory_items", function (
+  await db.query("SELECT * FROM inventory_items", function (
     error,
     results,
     fields
   ) {
-    items = results;
+    // console.log(results)
     res.render("form/stockEntry", { logged: req.session.admin, item: results });
   });
 });
 
-router.post("/stock", async (req, res) => {
-  console.log(items[0].Item_Name);
-  for (var i = 0; i < items.length; i++) {
-    await db.query(
-      "UPDATE inventory_items SET Main_Qty = ? WHERE Item_Name = ?",
-      [req.body.item[i], items[i].Item_Name],
-      function (err, result, fields) {
-        if (err) {
-          console.log(err);
-        } else {
-          res.render("success", { logged: req.session.admin });
+router.get("/stock/:subcategory", isLogged, async (req, res) => {
+  await db.query(
+    "SELECT * FROM inventory_items WHERE Sub_Category = ? ",
+    [req.params.subcategory],
+    function (error, results) {
+      // console.log(results);
+      db.query("SELECT * FROM inventory_items", function (
+        error,
+        result,
+        allSub
+      ) {
+        items = result;
+        console.log(items);
+        res.render("form/stockEntryForm", {
+          logged: req.session.admin,
+          item: results,
+          allSub: allSub,
+        });
+      });
+    }
+  );
+});
+
+router.post("/stock", isLogged, async (req, res) => {
+  for (var i = 0; i < req.body.item.length; i++) {
+    //console.log(items[i].Item_Name);
+
+    // console.log(items[i].Item_Name);
+    if (!req.body.item[i]) {
+      console.log("value Not updated");
+    } else {
+      console.log(req.body.item[i]);
+      await db.query(
+        "UPDATE inventory_items SET Main_Qty = ? WHERE Item_Name = ?",
+        [req.body.item[i], items[i].Item_Name],
+        function (err, result, fields) {
+          if (err) {
+            console.log(err);
+          }
         }
-      }
-    );
+      );
+    }
   }
-  res.render("success", { logged: req.session.admin });
+  res.redirect("/form/stock");
 });
 
 //PRODUCTION FORM
