@@ -41,7 +41,7 @@ router.post("/submit/inventory", upload.array("xcel"), async (req, res) => {
         Purchase_Price: rows[i][8],
         Kitchen: req.session.user,
       };
-      console.log(item);
+      console.log("cgvh");
       await db.query("INSERT into inventory_items SET?", item, function (
         err,
         result,
@@ -49,6 +49,8 @@ router.post("/submit/inventory", upload.array("xcel"), async (req, res) => {
       ) {
         if (err) {
           console.log(err);
+        } else {
+          console.log("done");
         }
       });
     }

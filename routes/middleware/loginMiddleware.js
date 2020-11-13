@@ -10,7 +10,7 @@ const checkIfUserExists = async (req, res, next) => {
     function (error, results, fields) {
       if (results.length == 0) {
         msg.push("User Not registered");
-        res.render("Login", {
+        res.render("user/login", {
           msg: msg,
           fail: fail,
           display1: "none",

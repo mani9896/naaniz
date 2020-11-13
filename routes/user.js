@@ -95,7 +95,7 @@ router.post("/login", checkIfRegister, async (req, res) => {
         res.redirect("/");
       } else {
         var msg = ["Wrong Credentials"];
-        res.render("Login", {
+        res.render("user/login", {
           msg: msg,
           display1: "block",
           display2: "none",
