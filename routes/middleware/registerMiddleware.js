@@ -12,25 +12,25 @@ const checkIfUserExists = async (req, res, next) => {
         msg.push("USER ALREADY");
         ifUserfound = true;
       }
-      db.query("SELECT * FROM users WHERE Username = ?", req.body.username, function (
-        error,
-        results,
-        fields
-      ) {
-        if (results.length > 0) {
-          msg.push("ALREADY HERE");
-          res.render("Home", {
-            msg: msg,
-            fail: fail,
-            display1: "none",
-            display2: "block",
-            logged: false,
-          });
-          ifUserfound = true;
-        } else {
-          next();
+      db.query(
+        "SELECT * FROM users WHERE Username = ?",
+        req.body.username,
+        function (error, results, fields) {
+          if (results.length > 0) {
+            msg.push("ALREADY HERE");
+            res.render("index", {
+              msg: msg,
+              fail: fail,
+              display1: "none",
+              display2: "block",
+              logged: false,
+            });
+            ifUserfound = true;
+          } else {
+            next();
+          }
         }
-      });
+      );
     }
   );
 };

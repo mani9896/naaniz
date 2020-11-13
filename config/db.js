@@ -5,9 +5,8 @@ const mysql = require("mysql");
 const db = mysql.createConnection({
   host: "127.0.0.1",
   user: "root",
-  password: "anshul",
+  password: "",
   database: "naniz",
-  dialect: "mysql",
 });
 
 //aws database
@@ -17,8 +16,6 @@ const db = mysql.createConnection({
 //   user: "admin",
 //   password: "anshul1610",
 //   database: "naniz",
-//   dialect: "mysql"
-// });
 
 db.connect((err) => {
   if (err) {
