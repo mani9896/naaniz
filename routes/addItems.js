@@ -41,10 +41,10 @@ router.post("/submit/inventory", upload.array("xcel"), async (req, res) => {
         Purchase_Price: rows[i][8],
         Kitchen: req.session.user,
       };
-      console.log("cgvh");
+
       await db.query(
-        "INSERT into inventory_items SET ? ON DUPLICATE KEY UPDATE Main_Qty = ?",
-        [item, item.Main_Qty],
+        "INSERT into inventory_items SET ? ON DUPLICATE KEY UPDATE Main_Qty = ?, Sub_Units = ?, GST = ?, Purchase_Price = ?",
+        [item, item.Main_Qty, item.Sub_Units, item.GST, item.Purchase_Price],
         function (err, result, fields) {
           if (err) {
             console.log(err);
@@ -79,8 +79,8 @@ router.post("/submit/recipe", upload.array("xcel"), async (req, res) => {
       };
       console.log(item);
       await db.query(
-        "INSERT into inventory_items SET ? ON DUPLICATE KEY UPDATE Main_Qty = ?",
-        item,
+        "INSERT into receipe SET ? ON DUPLICATE KEY UPDATE Req_Qty = ?, Watage = ?, Yield = ? , Type = ?",
+        [item, item.Req_Qty, item.Watage, item.Yield, item.Type],
         function (err, result, fields) {
           if (err) {
             console.log(err);

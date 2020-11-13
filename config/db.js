@@ -16,6 +16,8 @@ const db = mysql.createConnection({
 //   user: "admin",
 //   password: "anshul1610",
 //   database: "naniz",
+//   dialect: "mysql"
+// });
 
 db.connect((err) => {
   if (err) {
