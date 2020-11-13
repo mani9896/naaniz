@@ -27,7 +27,7 @@ router.post("/submit/inventory", upload.array("xcel"), async (req, res) => {
   const readXlsxFile = require("read-excel-file/node");
 
   await readXlsxFile(req.files[0].path).then(async (rows) => {
-    await db.query("TRUNCATE TABLE inventory_items");
+    // await db.query("TRUNCATE TABLE inventory_items");
     for (var i = 1; i < rows.length; i++) {
       var item = {
         Main_Category: rows[i][0],
@@ -42,17 +42,17 @@ router.post("/submit/inventory", upload.array("xcel"), async (req, res) => {
         Kitchen: req.session.user,
       };
       console.log("cgvh");
-      await db.query("INSERT into inventory_items SET?", item, function (
-        err,
-        result,
-        fields
-      ) {
-        if (err) {
-          console.log(err);
-        } else {
-          console.log("done");
+      await db.query(
+        "INSERT into inventory_items SET ? ON DUPLICATE KEY UPDATE Main_Qty = ?",
+        [item, item.Main_Qty],
+        function (err, result, fields) {
+          if (err) {
+            console.log(err);
+          } else {
+            console.log("done");
+          }
         }
-      });
+      );
     }
   });
   res.render("success", { logged: req.session.admin });
@@ -62,7 +62,7 @@ router.post("/submit/inventory", upload.array("xcel"), async (req, res) => {
 router.post("/submit/recipe", upload.array("xcel"), async (req, res) => {
   console.log(req.files.length);
   const readXlsxFile = require("read-excel-file/node");
-  await db.query("TRUNCATE TABLE receipe");
+  //await db.query("TRUNCATE TABLE receipe");
   await readXlsxFile(req.files[0].path).then(async (rows) => {
     for (var i = 1; i < rows.length; i++) {
       var item = {
@@ -78,16 +78,16 @@ router.post("/submit/recipe", upload.array("xcel"), async (req, res) => {
         Kitchen: req.session.user,
       };
       console.log(item);
-      await db.query("INSERT into receipe SET?", item, function (
-        err,
-        result,
-        fields
-      ) {
-        if (err) {
-          console.log(err);
-          res.send("<h1>Failed</h1>");
+      await db.query(
+        "INSERT into inventory_items SET ? ON DUPLICATE KEY UPDATE Main_Qty = ?",
+        item,
+        function (err, result, fields) {
+          if (err) {
+            console.log(err);
+            res.send("<h1>Failed</h1>");
+          }
         }
-      });
+      );
     }
   });
   res.render("success", { logged: req.session.admin });
