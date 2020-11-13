@@ -11,13 +11,7 @@ const db = mysql.createConnection({
 
 //aws database
 
-// const db = mysql.createConnection({
-//   host: "database-1.c1dhbv3ltu4l.ap-south-1.rds.amazonaws.com",
-//   user: "admin",
-//   password: "anshul1610",
-//   database: "naniz",
-//   dialect: "mysql"
-// });
+
 
 db.connect((err) => {
   if (err) {
