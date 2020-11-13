@@ -41,19 +41,18 @@ router.post("/submit/inventory", upload.array("xcel"), async (req, res) => {
         Purchase_Price: rows[i][8],
         Kitchen: req.session.user,
       };
-
-      var flag = false;
-      await db
-        .query(
-          "SELECT * FROM inventory_items WHERE Item_Name = ? ",
-          item.Item_Name,
-          function (err, result, req) {
-            if (result.length > 0) {
-              flag = true;
-            }
-          }
-        )
-        .then(() => insert(item, flag));
+      console.log("cgvh");
+      await db.query("INSERT into inventory_items SET?", item, function (
+        err,
+        result,
+        fields
+      ) {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log("done");
+        }
+      });
     }
   });
   res.render("success", { logged: req.session.admin });
@@ -103,15 +102,4 @@ router.get("/recipe", isLogged, (req, res) => {
     logged: req.session.admin,
   });
 });
-
-function insert(item, flag) {
-  if (flag == true) {
-    console.log("item FOund");
-    console.log(item);
-  } else {
-    console.log("Not found");
-    console.log("Item");
-  }
-}
-
 module.exports = router;
